@@ -1,0 +1,33 @@
+<mat-toolbar color="primary" class="d-block header-toolbar" [class.mat-elevation-z6]="true">
+	<mat-toolbar-row class="pl-2 pr-2 d-flex">
+
+
+		<span>
+			<img src="./../../../assets/img/tbi_logo_rectangular_blanco.png" alt="" height="40px" routerLink="/">
+		</span>
+
+		<span class="example-spacer"></span>
+
+
+
+		<button mat-icon-button routerLink="favoritos">
+			<!-- <mat-icon matBadge="4" matBadgeColor="warn" class="text-material-primary" routerLink="registros"></mat-icon> -->
+			<mat-icon matBadgeColor="warn" class="text-material-primary">
+				favorite_border</mat-icon>
+		</button>
+		<button mat-icon-button>
+			<mat-icon class="text-material-primary" routerLink="buscar">search</mat-icon>
+		</button>
+		<button mat-icon-button (click)="sidenavToggle()">
+			<mat-icon class="text-material-primary">menu</mat-icon>
+		</button>
+
+		<!-- 
+
+      <ng-template #volver>
+        <button mat-icon-button (click)="regresar()">
+          <mat-icon class="text-material-primary">arrow_back</mat-icon>
+        </button>
+      </ng-template> -->
+	</mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,70 @@
+<div class="container">
+	
+	<div class="row">
+		<div class="col-12 p-3">
+			
+			
+			<!-- <button mat-button class="text-material-primary" (click)="iniciarSesionFacebook()">
+				Entrar con facebook
+			</button> -->
+			
+			<!-- HAY SESIÓN -->
+			<div *ngIf="autorizacion.gioUsuario | async as usuario; else login">
+				<div class="row" *ngIf="usuario.photoURL">
+					<div class="col-12 p-5 pb-0">
+							<img class="rounded-circle" style="width:100%;"
+							src="{{ usuario.photoURL }}?height=500">
+					</div>
+				</div>
+		
+				
+				<button mat-button [matMenuTriggerFor]="userMenu" class="text-material-primary" style="margin: 0px auto">
+					
+					<span *ngIf="usuario.isAnonymous; else usuarioRegistrado">
+						Anónimo
+					</span>
+
+					<ng-template #usuarioRegistrado>
+						{{ usuario.displayName }}
+					</ng-template>
+
+					<mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+				</button>
+				
+		
+			</div>
+
+			<!-- SI NO HAY SESIÓN -->
+			<ng-template #login>
+				<button routerLink="/sesion-iniciar" mat-button class="text-material-primary" (click)="sideNavCerrar()">
+					<mat-icon>account_circle</mat-icon> Iniciar sesión
+				</button>
+			</ng-template>
+
+			<mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before">
+				<button mat-menu-item (click)="autorizacion.cerrarSesion()" (click)="sideNavCerrar()">
+					<mat-icon>exit_to_app</mat-icon>
+					<span>Cerrar sesión</span>
+				</button>
+			</mat-menu>
+
+
+
+			<!-- MENÚ GENERAL -->
+			<mat-list>
+				<mat-list-item routerLink="registros" (click)="sideNavCerrar()">
+					<b class="text-light">Departamentos</b>
+				</mat-list-item>
+
+				<mat-list-item routerLink="buscar" (click)="sideNavCerrar()">
+					<b class="text-light">Buscar departamentos</b>
+				</mat-list-item>
+
+
+				<mat-list-item routerLink="favoritos" (click)="sideNavCerrar()">
+					<b class="text-light">Mis favoritos</b>
+				</mat-list-item>
+			</mat-list>
+		</div>
+	</div>
+</div>

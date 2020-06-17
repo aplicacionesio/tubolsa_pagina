@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap");
+
+h1,
+h2,
+p {
+  font-family: "Roboto", sans-serif !important;
+}
+
+h3,
+h4,
+h5,
+i {
+  font-family: "Roboto Condensed", sans-serif !important;
+}
+
+.contenedor-total {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.sidenav-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.barra-lateral {
+  width: 250px;
+}
+
+.router-outlet {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  // background: url('./../assets/img/tbi_home.jpg') bottom left;
+  // background-size:contain;
+}
+
+.full-width-dialog .mat-dialog-container {
+  width: 900px!important;
+}
+
+.full-width-dialog .mat-dialog-container .slider-portada {
+  width: 900px!important;
+}
+
+// panelClass: 'full-width-dialog'

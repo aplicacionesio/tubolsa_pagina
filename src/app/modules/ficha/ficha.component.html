@@ -1,0 +1,153 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row animated bounceIn">
+            <div class="col-12 mt-5 pt-5 pb-5 pr-0 pl-0">
+                <div *ngFor="let item of departamento | keyvalue">
+                    
+                    <div class="card shadow">
+
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div *ngFor="let foto of item.value.fotos; let index = index" class="carousel-item active" [class.active]="index == 0">
+                                    <img src="{{ foto.url }}" class="card-img-top" style="width:100%;">
+                                </div>
+                            </div>
+
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+
+                        
+
+                        <div class="titulo p-1 pl-3 text-light" style="width: 70%; margin-top: -15px; z-index: 999;">
+                            <h4 style="font-weight: normal;">{{ item.value.desarrollo }}</h4>
+                        </div>
+
+
+                        <div class="card-body">
+        
+                            <div class="row">
+                                <div class="col-2 p-0 pr-3 text-right">
+                                    <mat-icon color="primary" style="font-size: 32px;">room</mat-icon>
+                                </div>
+                                <div class="col-10 p-0">
+                                    <p style="font-size: 12px;">
+                                        {{ item.value.direccion }}
+                                    </p>
+                                </div>
+                            </div>
+        
+                        </div>
+                        
+                        <div class="pb-3">
+                            <div class="p-1 pb-0 text-center">
+                                Compartir
+                            </div>
+                            <share-buttons [theme]="'modern-dark'"
+                                [include]="['whatsapp','facebook','twitter','pinterest','messenger','sms']"
+                                [show]="4"
+                                [showText]="false"
+                                [url]="'https://tubolsainmobiliaria.com/#/'+url"
+                                [autoSetMeta]="false"
+                                ></share-buttons>
+                        </div>
+
+                        <div class="fondo-azul p-2">
+                            Características
+                        </div>
+                        
+                        <div class="card-body">
+                            {{ item.value.descripcion }}
+                        </div>
+
+                        
+                        <ul>
+                                <div *ngIf="item.value.tipo_venta == 1"><b class="text-success"><i class="fas fa-bookmark"></i> Preventa</b></div>
+                                <div *ngIf="item.value.tipo_venta == 2"><b class="text-danger"><i class="fas fa-bookmark"></i> Entrega inmediata</b></div>
+
+                                <div *ngIf="!item.value.metros_cuadrados == 0"><i class="text-primary fas fa-building"></i> {{ item.value.metros_cuadrados }} m2</div>
+                                <div *ngIf="!item.value.recamaras == 0"><i class="text-primary fas fa-bed"></i> {{ item.value.recamaras }} Recamaras</div>
+                                <div *ngIf="!item.value.banos == 0"><i class="text-primary fas fa-toilet"></i> {{ item.value.banos }} Baños</div>
+                                <div *ngIf="!item.value.estacionamiento == 0"><i class="text-primary fas fa-car"></i> {{ item.value.estacionamiento }} Estacionamiento</div>
+                                <div *ngIf="!item.value.patio_de_servicio == 0"><i class="text-primary fas fa-circle"></i> Patio de servicio</div>
+                                <div *ngIf="!item.value.elevador == 0"><i class="far fa-caret-square-up text-primary"></i> Elevador</div>
+                                <div *ngIf="!item.value.roof_garden_privado == 0"><i class="text-primary fas fa-layer-group"></i> Roof garden privado</div>
+                                <div *ngIf="!item.value.roof_garden_pubdivco == 0"><i class="text-primary fas fa-layer-group"></i> Roof garden púbdivco</div>
+                                <div *ngIf="!item.value.terraza == 0"><i class="text-primary fas fa-store"></i> Terraza</div>
+                                <!-- <div>vendido : {{ item.value.vendido }}</li> -->
+                            </ul>
+                            
+
+                            <div class="d-flex">
+                                
+                                <div class="p-3 text-left">
+                                    <a class="text-danger" (click)="guardarFavorito(autorizacion.traerUidSiExisteUsuario(), item.value)" *ngIf="autorizacion.gioUsuario | async as usuario; else login">
+                                        <mat-icon class="text-material-primary">favorite</mat-icon>
+                                    </a>
+                                </div>
+                                
+                                <div *ngIf="!item.value.precio_final == 0" class="p-3 text-right text-danger w-100">
+                                    <b><i class="fas fa-tags"></i> {{ item.value.precio_final | currency }}</b>
+                                </div>
+                            </div>
+                            
+
+
+                        <div>
+                            <agm-map [latitude]="item.value.ubicacion.lat" [longitude]="item.value.ubicacion.lng" [zoom]="15">
+                                <agm-marker [latitude]="item.value.ubicacion.lat" [longitude]="item.value.ubicacion.lng"></agm-marker>
+                            </agm-map>
+                        </div>
+
+
+                        <div class="fondo-azul p-2" *ngIf="autorizacion.gioUsuario | async as usuario; else login">
+                            {{ item.value.contacto.contacto_nombre }}
+                        </div>
+                        
+
+                        <div class="card-footer text-center" *ngIf="autorizacion.gioUsuario | async as usuario; else login">
+                            
+                            <div class="row text-center">
+                                <div class="col-12">
+
+                                        <a *ngIf="item.value.contacto.contacto_telefono != null" class="m-3" href="tel:{{item.value.contacto.contacto_telefono}}" style="display:inline-block;" target="_blank">
+                                            <i class="fas fa-phone-alt icon-phone" style="font-size: 36px;"></i>
+                                        </a>
+                    
+                                        <a *ngIf="item.value.contacto.contacto_correo != null" class="m-3" href="mailto:{{item.value.contacto.contacto_telefono}}" style="display:inline-block;" target="_blank">
+                                            <i class="fas fa-envelope icon-mail" style="font-size: 36px;"></i>
+                                        </a>
+                    
+                                        <a *ngIf="item.value.contacto.contacto_facebook != null" class="m-3" href="{{item.value.contacto.contacto_telefono}}" style="display:inline-block;" target="_blank">
+                                            <i class="fab fa-facebook icon-facebook" style="font-size: 36px;"></i>
+                                        </a>
+                    
+                                        <a *ngIf="item.value.contacto.contacto_whatsapp != null" class="m-3" href="https://api.whatsapp.com/send?phone={{item.value.contacto.contacto_whatsapp}}" style="display:inline-block;" target="_blank">
+                                            <i class="fab fa-whatsapp icon-whatsapp" style="font-size: 36px;"></i>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    
+                    
+                    
+                    <!-- <div *ngFor="let foto of item.value.fotos | keyvalue" [ngClass]="(foto.key=='0')?'carousel-item active':'carousel-item'">
+                        <img src="{{ foto.value.url }}" class="d-block w-100" alt="...">
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

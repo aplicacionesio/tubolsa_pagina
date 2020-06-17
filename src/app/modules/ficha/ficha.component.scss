@@ -1,0 +1,29 @@
+@import './../../../../node_modules/@ngx-share/button/themes/modern/modern-dark-theme.css';
+// @import './../../../../node_modules/@ngx-share/button/themes/modern/modern-dark-theme';
+
+agm-map {
+    height: 200px;
+    width: 100%;
+}
+
+.titulo {
+    background: #004F9A;
+}
+
+.fondo-azul {
+    background: #004F9A;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+
+.icon-facebook, .icon-mail, .icon-phone {
+    color: rgb(37, 65, 158);
+}
+
+
+.icon-whatsapp {
+    color: rgb(32, 190, 0);
+}

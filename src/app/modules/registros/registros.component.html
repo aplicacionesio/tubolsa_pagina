@@ -1,0 +1,58 @@
+<div class="container bg-light" style="padding-top:56px;">
+    <div class="row">
+        
+
+                <div class="col-12 col-md-6 col-lg-4 animated fadeInUp" *ngFor="let item of departamentos | keyvalue">    
+                        <div class="card shadow mt-3 mb-3">
+                            <img src="{{ item.value.fotos[0].url }}" class="card-img-top">
+                            
+                            <div class="card-body pb-0">
+                                <h4>{{ item.value.desarrollo }}</h4>
+                                <p>{{ item.value.direccion }}</p>
+                            </div>
+                            
+                            <div *ngIf="item.value.tipo_venta == '1'" class="bg-success text-center text-light p-2">
+                                PREVENTA
+                            </div>
+
+                            <div *ngIf="item.value.tipo_venta == '2'" class="bg-danger text-center text-light p-2">
+                                ENTREGA INMEDIATA
+                            </div>
+
+                            <div class="card-body text-center">
+                               
+                                <div class="row">
+                                    <div class="col-3">
+                                        <a class="text-danger" (click)="guardarFavorito(autorizacion.traerUidSiExisteUsuario(), item.value)" *ngIf="autorizacion.gioUsuario | async as usuario; else login">
+                                            <mat-icon class="text-material-primary">favorite</mat-icon>
+                                        </a>
+                                    </div>
+                                    <div class="col-9">
+                                        <button class="btn btn-primary" [routerLink]="['/ficha', item.value.id]">
+                                            VER DESARROLLO
+                                        </button>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+                        </div>
+                </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<!-- {{ item.value.fotos }} -->
+<!-- {{ item | json }} - {{ item.value.id }} -->
+<!-- Object Key:{{item.key}} and Object Value:{{item.value}} -->
+
+
+
+<!-- <div *ngFor="let foto of item.value.fotos | keyvalue">
+<img src="{{ foto.value.url }}" alt="" width="100%">
+</div> -->

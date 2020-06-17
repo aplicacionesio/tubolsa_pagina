@@ -1,0 +1,55 @@
+<div class="container-fluid fondo-foto" style="margin-top: 56px;">
+    <div class="container pt-3">
+
+        <div *ngIf="autorizacion.gioUsuario | async as usuario; else login">
+            
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 animated fadeInUp" *ngFor="let item of departamentos | keyvalue">    
+                    <div class="card shadow mt-3 mb-3">
+                        <img src="{{ item.value.departamento.fotos[0].url }}" class="card-img-top">
+                        
+                        <div class="card-body pb-0">
+                            <h4>{{ item.value.departamento.desarrollo }}</h4>
+                        </div>
+                        
+                        <div *ngIf="item.value.departamento.tipo_venta == '1'" class="bg-success text-center text-light p-2">
+                            PREVENTA
+                        </div>
+    
+                        <div *ngIf="item.value.departamento.tipo_venta == '2'" class="bg-danger text-center text-light p-2">
+                            ENTREGA INMEDIATA
+                        </div>
+    
+                        <div class="card-body text-center">
+                           
+                            <div class="row">
+                                <div class="col-3">
+                                </div>
+                                <div class="col-9">
+                                    <button class="btn btn-primary" [routerLink]="['/ficha', item.value.departamento.id]">
+                                        VER DESARROLLO
+                                    </button>
+                                </div>
+                            </div>
+                           
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        
+        <ng-template #login>
+            <div class="d-block alert alert-warning w-100 mt-3">
+                <p>Para ver sus favoritos, debe iniciar sesión.</p>
+                
+                <button class="btn btn-success" routerLink="/sesion-iniciar">
+                    Iniciar sesión
+                </button>
+            </div>
+        </ng-template>
+
+    </div>
+</div>
